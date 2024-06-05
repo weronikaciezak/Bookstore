@@ -5,6 +5,7 @@
 </head>
 <body>
 <h1>Logowanie</h1>
+<div th:if="${message}" th:text="${message}"></div>
 <div th:if="${errorMessage}" th:text="${errorMessage}"></div>
 <div th:if="${logoutMessage}" th:text="${logoutMessage}"></div>
 <form th:action="@{/login}" method="post">

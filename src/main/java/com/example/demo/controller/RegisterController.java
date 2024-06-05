@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class RegisterController {
@@ -15,14 +16,19 @@ public class RegisterController {
     private UserService userService;
 
     @GetMapping("/register")
-    public String register(Model model) {
+    public String showRegistrationForm(Model model) {
         model.addAttribute("user", new User());
         return "register";
     }
 
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute User user) {
-        userService.save(user);
-        return "redirect:/login";
+    public String registerUser(@ModelAttribute("user") User user, Model model, RedirectAttributes redirectAttributes) {
+        String result = userService.registerUser(user);
+        model.addAttribute("message", result);
+        redirectAttributes.addAttribute("message",result);
+        if (result.equals("success")) {
+            return "redirect:/login";
+        }
+        return "register";
     }
 }
