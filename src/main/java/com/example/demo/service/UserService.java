@@ -1,11 +1,14 @@
 package com.example.demo.service;
 
+import com.example.demo.model.Cart;
 import com.example.demo.model.Role;
 import com.example.demo.model.User;
 import com.example.demo.repository.RoleRepository;
 import com.example.demo.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +24,7 @@ public class UserService {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
+    @Transactional
     public void save(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         //user.setEnabled(true);
@@ -38,6 +42,7 @@ public class UserService {
             return "failure";
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setCart(new Cart());
         Role userRole = roleRepository.findByName("USER").orElseGet(null);
         if (userRole != null) {
             user.getRoles().add(userRole);
@@ -45,8 +50,16 @@ public class UserService {
             Role role = new Role();
             role.setName("USER");
             user.getRoles().add(role);
+            roleRepository.save(role); //TODO: check if this is needed
         }
         userRepository.save(user);
-        return"success";
+        return "success";
+    }
+
+    @Transactional
+    public User getCurrentUser() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = ((UserDetails) principal).getUsername();
+        return userRepository.findByUsername(username).orElse(null);
     }
 }

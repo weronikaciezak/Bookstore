@@ -6,6 +6,9 @@
 <body>
 <h1>Admin panel!</h1>
 <p>admin</p>
+<form th:action="@{/book/main}" method="get">
+    <button type="submit">Książki</button>
+</form>
 <form th:action="@{/logout}" method="post">
     <button type="submit">Wyloguj się</button>
 </form>

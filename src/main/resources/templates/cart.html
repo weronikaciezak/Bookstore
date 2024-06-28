@@ -1,0 +1,30 @@
+<h1>Koszyk</h1>
+<div th:if="${cart.items.isEmpty()}">
+    <p>Koszyk pusty.</p>
+</div>
+<div th:unless="${cart.items.isEmpty()}">
+    <table>
+        <thead>
+        <tr>
+            <th>Tytuł</th>
+            <th>Autor</th>
+            <th>Cena</th>
+            <th>Ilość</th>
+            <th>Usuń</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${cart.items}">
+            <td th:text="${item.book.title}"></td>
+            <td th:text="${item.book.author}"></td>
+            <td th:text="${item.book.price}"></td>
+            <td th:text="${item.quantity}"></td>
+            <td>
+            <form th:action="@{/cart/remove/{bookId}(bookId=${item.book.id})}" method="get">
+                <button type="submit">usuń</button>
+            </form>
+        </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
