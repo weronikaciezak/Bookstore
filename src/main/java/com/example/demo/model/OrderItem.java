@@ -7,15 +7,14 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "cart_item")
-public class CartItem {
+@Table(name = "order_item")
+public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
-    @JoinColumn(name = "cart_id")
-    private Cart cart;
+
     @ManyToOne
     private Book book;
     private int quantity;
 }
+
