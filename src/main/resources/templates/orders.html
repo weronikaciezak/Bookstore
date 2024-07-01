@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Orders</title>
+</head>
+<h1>Zamówienia</h1>
+<body>
+<div th:each="order : ${order}">
+    <div th:text="${order.id}" sec:authorize="hasAuthority('ADMIN')"></div>
+    <div th:text="${order.user.username}" sec:authorize="hasAuthority('ADMIN')"></div>
+    <div th:text="${order.date}"></div>
+    <div th:text="${order.status}"></div>
+    <div th:each="order : ${order.items}">
+        <div th:text="${order.book.title}"></div>
+        <div th:text="${order.book.author}"></div>
+        <div th:text="${'Cena: ' + order.book.price + ' zł'}"></div>
+        <div th:text="${'Ilość: ' + order.quantity}"></div>
+    </div>
+    <form method="get" th:action="@{/admin/orders/{id}(id=${order.id})}" sec:authorize="hasAuthority('ADMIN')">
+        <input type="submit" value="Edytuj"/>
+    </form>
+</div>
+
+</body>
+</html>

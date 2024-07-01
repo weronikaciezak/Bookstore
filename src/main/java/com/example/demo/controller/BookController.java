@@ -37,7 +37,7 @@ public class BookController {
     public String update(@PathVariable int id, Model model) {
         Optional<Book> bookOpt = this.bookService.getById(id);
         if (bookOpt.isEmpty()) {
-            return "redirect:/book/main"; //TODO kaka w chuj, naprawic kiedys
+            return "redirect:/book/main";
         }
         model.addAttribute("book", bookOpt.get());
         return "book-form-edit";

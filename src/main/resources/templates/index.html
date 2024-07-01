@@ -16,7 +16,6 @@
         <div th:text="${'Cena: ' + book.price + ' zł'}"></div>
         <div th:text="${'Ilość: ' + book.quantity}"></div>
 
-<!--        <a th:href="@{/book/update/{id}(id=${book.id})}" sec:authorize="hasAuthority('ADMIN')" method="get">Edytuj</a>-->
         <a th:href="@{/cart/add/{bookId}/1(bookId=${book.id})}" sec:authorize="hasAuthority('USER')">Add to Cart</a>
 
         <form method="get" th:action="@{/book/update/{id}(id=${book.id})}" sec:authorize="hasAuthority('ADMIN')">

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class OrderService {
@@ -47,4 +48,20 @@ public class OrderService {
     public void saveOrder(Order order) {
         orderRepository.save(order);
     }
+
+    @Transactional
+    public List<Order> getAll() {
+        return orderRepository.findAll();
+    }
+
+    @Transactional
+    public void saveOrUpdate(Order order) {
+        orderRepository.save(order);
+    }
+
+    @Transactional
+    public List<Order> getOrdersByUser(User user) {
+        return orderRepository.findByUser(user);
+    }
+
 }

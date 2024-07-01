@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Zmień Status Zamówienia</title>
+</head>
+<body>
+<h1>Zmień Status Zamówienia</h1>
+<form method="post" th:action="@{/admin/orders/{id}(id=${order.id})}">
+    <label for="status">Order Status:</label>
+    <select id="status" name="status" th:field="*{order.status}">
+        <option th:each="status : ${orderStatusValues}"
+                th:value="${status}"
+                th:text="${status}">
+        </option>
+    </select>
+    <input type="submit" value="Zmień status">
+</form>
+</body>
+</html>

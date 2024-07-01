@@ -1,4 +1,5 @@
 <h1>Koszyk</h1>
+<div th:if="${message}" th:text="${message}"></div>
 <div th:if="${cart.items.isEmpty()}">
     <p>Koszyk pusty.</p>
 </div>
