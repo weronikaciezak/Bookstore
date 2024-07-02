@@ -1,30 +1,94 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+
+        body {
+            /* Apply the background image */
+            background-image: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0) 50%, transparent 50%),
+            url('https://assets.teenvogue.com/photos/5e6bffbbdee1770008c6d9bd/16:9/w_2560%2Cc_limit/GettyImages-577674005.jpg');
+
+            /* Position and size the image */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        body {
+            background-color: #f7f9fc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .card {
+            border: none;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+        .form-control:focus {
+            box-shadow: none;
+        }
+    </style>
 </head>
 <body>
-<h1>Logowanie</h1>
-<div th:if="${message}" th:text="${message}"></div>
-<div th:if="${errorMessage}" th:text="${errorMessage}"></div>
-<div th:if="${logoutMessage}" th:text="${logoutMessage}"></div>
-<form th:action="@{/login}" method="post">
-    <div>
-        <label for="username">Nazwa użytkownika:</label>
-        <input type="text" id="username" name="username" required/>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="text-center mb-4">Logowanie</h1>
+                    <div th:if="${message}" class="alert alert-info" th:text="${message}"></div>
+                    <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
+                    <div th:if="${logoutMessage}" class="alert alert-warning" th:text="${logoutMessage}"></div>
+                    <form th:action="@{/login}" method="post">
+                        <div class="form-group">
+                            <label for="username">Nazwa użytkownika:</label>
+                            <input type="text" id="username" name="username" class="form-control" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Hasło:</label>
+                            <input type="password" id="password" name="password" class="form-control" required/>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-block">Zaloguj się</button>
+                        </div>
+                        <div class="text-center mt-3">
+                            <a href="/register" class="btn btn-secondary">Register</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
-        <label for="password">Hasło:</label>
-        <input type="password" id="password" name="password" required/>
-    </div>
-    <div>
-        <button type="submit">Zaloguj się</button>
-    </div>
-    <div>
-        <a href="/register">
-            <button type="button">Register</button>
-        </a>
-    </div>
-</form>
+</div>
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

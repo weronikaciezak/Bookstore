@@ -2,18 +2,66 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Zmień Status Zamówienia</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .form-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .form-container input[type="submit"] {
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
-<h1>Zmień Status Zamówienia</h1>
-<form method="post" th:action="@{/admin/orders/{id}(id=${order.id})}">
-    <label for="status">Order Status:</label>
-    <select id="status" name="status" th:field="*{order.status}">
-        <option th:each="status : ${orderStatusValues}"
-                th:value="${status}"
-                th:text="${status}">
-        </option>
-    </select>
-    <input type="submit" value="Zmień status">
-</form>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">BookStore</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <form th:action="@{/admin/adminpanel}" method="get" class="nav-link">
+                    <button type="submit" class="btn btn-link text-dark">Home</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="form-container">
+        <h1 class="text-center">Zmień Status Zamówienia</h1>
+        <form method="post" th:action="@{/admin/orders/{id}(id=${order.id})}">
+            <div class="form-group">
+                <label for="status">Order Status:</label>
+                <select id="status" name="status" class="form-control" th:field="*{order.status}">
+                    <option th:each="status : ${orderStatusValues}"
+                            th:value="${status}"
+                            th:text="${status}">
+                    </option>
+                </select>
+            </div>
+            <input type="submit" value="Zmień status" class="btn btn-primary mt-3">
+        </form>
+    </div>
+</div>
+
+<!-- Optional JavaScript; choose one of the two -->
+<!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+<!-- Option 2: Separate Popper and Bootstrap JS -->
+<!--
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+-->
 </body>
 </html>

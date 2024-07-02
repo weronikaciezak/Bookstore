@@ -1,14 +1,73 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Book</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .form-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .form-container input[type="submit"] {
+            width: 100%;
+        }
+    </style>
+</head>
 <body>
-<div>
-    <form method="post" th:action="@{/book/update/{id}(id=${book.id})}">
-        <input type="text" placeholder="Tytuł" class="input-field" th:field="*{book.title}" id="title">
-        <input type="text" placeholder="Autor" class="input-field" th:field="*{book.author}" id="author">
-        <input type="text" placeholder="Cena" class="input-field" th:field="*{book.price}" id="price">
-        <input type="text" placeholder="Ilość" class="input-field" th:field="*{book.quantity}" id="quantity">
-        <input type="submit" value="Edytuj">
-    </form>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">BookStore</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <form th:action="@{/admin/adminpanel}" method="get" class="nav-link">
+                    <button type="submit" class="btn btn-link text-dark">Home</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="form-container">
+        <form method="post" th:action="@{/book/update/{id}(id=${book.id})}">
+            <div class="form-group">
+                <label for="title">Tytuł</label>
+                <input type="text" placeholder="Tytuł" class="form-control" th:field="*{book.title}" id="title">
+            </div>
+            <div class="form-group">
+                <label for="author">Autor</label>
+                <input type="text" placeholder="Autor" class="form-control" th:field="*{book.author}" id="author">
+            </div>
+            <div class="form-group">
+                <label for="price">Cena</label>
+                <input type="text" placeholder="Cena" class="form-control" th:field="*{book.price}" id="price">
+            </div>
+            <div class="form-group">
+                <label for="quantity">Ilość</label>
+                <input type="text" placeholder="Ilość" class="form-control" th:field="*{book.quantity}" id="quantity">
+            </div>
+            <input type="submit" value="Edytuj" class="btn btn-primary">
+        </form>
+    </div>
 </div>
+
+<!-- Optional JavaScript; choose one of the two -->
+<!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+<!-- Option 2: Separate Popper and Bootstrap JS -->
+<!--
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+-->
 </body>
 </html>

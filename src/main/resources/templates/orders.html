@@ -2,25 +2,116 @@
 <html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Orders</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zamówienia</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            /*background-color: #f7f9fc;*/
+        }
+        .card {
+            margin-bottom: 1.5rem;
+        }
+        .order-header {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        .order-item {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .order-item:last-child {
+            border-bottom: none;
+        }
+        .btn-edit {
+            margin-top: 1rem;
+        }
+    </style>
 </head>
-<h1>Zamówienia</h1>
 <body>
-<div th:each="order : ${order}">
-    <div th:text="${order.id}" sec:authorize="hasAuthority('ADMIN')"></div>
-    <div th:text="${order.user.username}" sec:authorize="hasAuthority('ADMIN')"></div>
-    <div th:text="${order.date}"></div>
-    <div th:text="${order.status}"></div>
-    <div th:each="order : ${order.items}">
-        <div th:text="${order.book.title}"></div>
-        <div th:text="${order.book.author}"></div>
-        <div th:text="${'Cena: ' + order.book.price + ' zł'}"></div>
-        <div th:text="${'Ilość: ' + order.quantity}"></div>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">BookStore</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item" sec:authorize="hasAuthority('USER')">
+                <form th:action="@{/}" method="get" class="nav-link">
+                    <button type="submit" class="btn btn-link text-dark">Home</button>
+                </form>
+            </li>
+
+            <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
+                <form th:action="@{/admin/adminpanel}" method="get" class="nav-link">
+                    <button type="submit" class="btn btn-link text-dark">Home</button>
+                </form>
+            </li>
+
+            <li class="nav-item" sec:authorize="hasAuthority('USER')">
+                <form th:action="@{/cart}" method="get" class="nav-link">
+                    <button type="submit" class="btn btn-link text-dark">Koszyk</button>
+                </form>
+            </li>
+        </ul>
     </div>
-    <form method="get" th:action="@{/admin/orders/{id}(id=${order.id})}" sec:authorize="hasAuthority('ADMIN')">
-        <input type="submit" value="Edytuj"/>
-    </form>
+</nav>
+
+<div class="container mt-5">
+    <h1 class="mb-4 text-center">Zamówienia</h1>
+
+    <div th:if="${order.isEmpty()}">
+        <p class="alert alert-warning">Brak zamówień.</p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div th:each="order : ${order}" class="card">
+                <div class="card-body">
+                    <div class="order-header" sec:authorize="hasAuthority('ADMIN')">
+                        Zamówienie ID: <span th:text="${order.id}"></span>
+                    </div>
+                    <div class="order-header" sec:authorize="hasAuthority('ADMIN')">
+                        Użytkownik: <span th:text="${order.user.username}"></span>
+                    </div>
+                    <div>
+                        Data: <span th:text="${order.date}"></span>
+                    </div>
+                    <div>
+                        Status: <span th:text="${order.status}"></span>
+                    </div>
+                    <div class="mt-3">
+                        <h5>Items:</h5>
+                        <div th:each="item : ${order.items}" class="order-item">
+                            <div>
+                                Tytuł: <span th:text="${item.book.title}"></span>
+                            </div>
+                            <div>
+                                Autor: <span th:text="${item.book.author}"></span>
+                            </div>
+                            <div>
+                                Ilość: <span th:text="${item.quantity}"></span>
+                            </div>
+                            <div>
+                                Cena: <span th:text="${item.book.price + ' zł'}"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <form method="get" th:action="@{/admin/orders/{id}(id=${order.id})}" sec:authorize="hasAuthority('ADMIN')" class="btn-edit">
+                        <button type="submit" class="btn btn-warning">Edytuj</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

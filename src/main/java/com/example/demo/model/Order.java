@@ -26,5 +26,7 @@ public class Order {
 
     private Date date;
     private OrderStatus status;
+
+    //TODO ADD PRICE
 }
 
