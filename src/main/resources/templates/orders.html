@@ -90,10 +90,10 @@
                     <form method="get" th:action="@{/admin/orders/{id}(id=${order.id})}" sec:authorize="hasAuthority('ADMIN')" class="d-inline">
                         <button type="submit" class="btn btn-warning">Edytuj</button>
                     </form>
-                    <form method="post" th:action="@{/order/delete}" sec:authorize="hasAuthority('ADMIN')" class="d-inline">
-                        <input type="hidden" th:name="id" th:value="${order.id}" />
-                        <input type="submit" class="btn btn-danger" value="Usuń"/>
-                    </form>
+<!--                    <form method="post" th:action="@{/order/delete}" sec:authorize="hasAuthority('ADMIN')" class="d-inline">-->
+<!--                        <input type="hidden" th:name="id" th:value="${order.id}" />-->
+<!--                        <input type="submit" class="btn btn-danger" value="Usuń"/>-->
+<!--                    </form>-->
                 </div>
             </div>
         </div>
