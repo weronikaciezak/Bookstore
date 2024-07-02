@@ -2,19 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title>Strona główna</title>
-    <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Optional theme -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap-theme.min.css" rel="stylesheet">
 
-    <!-- Add custom CSS for the background image -->
     <style>
         body {
-            /* Apply the background image */
             background-image: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0) 50%, transparent 50%),
             url('https://assets.teenvogue.com/photos/5e6bffbbdee1770008c6d9bd/16:9/w_2560%2Cc_limit/GettyImages-577674005.jpg');
-
-            /* Position and size the image */
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
@@ -30,7 +24,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav mr-auto"> <!-- ml-auto to push items to the right -->
+        <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
                 <form th:action="@{/}" method="get" class="nav-link">
                     <button type="submit" class="btn btn-link text-dark">Home</button>
@@ -82,16 +76,14 @@
 
     <style>
         .col-md-4 {
-            max-width: 200px; /* Adjust the max-width to the desired button width */
+            max-width: 200px;
         }
         .p-0 {
-            padding: 0; /* Remove padding for correct alignment */
+            padding: 0;
         }
     </style>
 
 </div>
-
-<!-- Bootstrap JS and dependencies (jQuery, Popper.js) -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

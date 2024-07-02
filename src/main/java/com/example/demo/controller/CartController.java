@@ -13,9 +13,14 @@ public class CartController {
     @Autowired
     CartService cartService;
 
-    @GetMapping("/add/{bookId}/{quantity}")
-    public String addToCart(@PathVariable int bookId, @PathVariable int quantity) {
-        cartService.addToCart(bookId, quantity);
+    //    @GetMapping("/add/{bookId}/{quantity}")
+//    public String addToCart(@PathVariable int bookId, @PathVariable int quantity) {
+//        cartService.addToCart(bookId, quantity);
+//        return "redirect:/cart";
+//    }
+    @PostMapping("/add")
+    public String addToCart(@RequestParam int id, @RequestParam int quantity) {
+        cartService.addToCart(id, quantity);
         return "redirect:/cart";
     }
 
