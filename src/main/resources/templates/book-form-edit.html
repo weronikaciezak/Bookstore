@@ -53,7 +53,11 @@
                 <label for="quantity">Ilość</label>
                 <input type="text" placeholder="Ilość" class="form-control" th:field="*{book.quantity}" id="quantity">
             </div>
-            <input type="submit" value="Edytuj" class="btn btn-primary">
+            <div class="form-group">
+                <label for="quantity">Zdjęcie</label>
+                <input type="text" placeholder="Zdjęcie" class="form-control" th:field="*{book.photo}" id="photo">
+            </div>
+            <input type="submit" value="Zapisz" class="btn btn-primary">
         </form>
     </div>
 </div>

@@ -44,4 +44,9 @@ public class OrderController {
         return "orders";
     }
 
+    @PostMapping("/delete")
+    public String deleteOrder(@RequestParam int id) {
+        orderService.delete((long) id);
+        return "redirect:/admin/orders";
+    }
 }

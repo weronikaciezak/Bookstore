@@ -2,8 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title>Strona główna</title>
-    <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .fixed-size-btn {
+            width: 150px;
+            height: 40px; /* Adjust the height as needed */
+            font-size: 1rem; /* Ensure text size is appropriate */
+            display: block;
+        }
+    </style>
+
 </head>
 <body>
 <!-- Navbar -->
@@ -24,35 +33,26 @@
 </nav>
 
 <div class="container mt-5">
-    <h1 class="text-left mb-4">Admin panel</h1>
+    <h1 class="text-left mb-4">Admin Panel</h1>
     <div class="row">
         <div class="col-md-12 mb-3">
             <form th:action="@{/book/main}" method="get">
-                <button type="submit" class="btn btn-primary">Książki</button>
+                <button type="submit" class="btn btn-primary fixed-size-btn">Książki</button>
             </form>
         </div>
         <div class="col-md-12 mb-3">
             <form th:action="@{/admin/orders}" method="get">
-                <button type="submit" class="btn btn-secondary">Zamowienia</button>
+                <button type="submit" class="btn btn-secondary fixed-size-btn">Zamowienia</button>
             </form>
         </div>
         <div class="col-md-12 mb-3">
             <form th:action="@{/logout}" method="post">
-                <button type="submit" class="btn btn-danger">Wyloguj się</button>
+                <button type="submit" class="btn btn-danger fixed-size-btn">Wyloguj się</button>
             </form>
         </div>
     </div>
 </div>
-<!-- Optional JavaScript; choose one of the two -->
-
-<!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-
-<!-- Option 2: Separate Popper and Bootstrap JS -->
-<!--
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
--->
 </body>
 </html>

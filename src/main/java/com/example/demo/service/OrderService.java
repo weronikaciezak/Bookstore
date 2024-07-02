@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.model.*;
+import com.example.demo.repository.BookDAO;
 import com.example.demo.repository.OrderRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +29,12 @@ public class OrderService {
         order.setDate(new Date());
         order.setStatus(OrderStatus.SUBMITTED);
         order.setUser(user);
+        order.setPrice(cart.getTotalPrice());
         for (CartItem cartItem : cart.getItems()) {
             OrderItem orderItem = new OrderItem();
             orderItem.setBook(cartItem.getBook());
             orderItem.setQuantity(cartItem.getQuantity());
+            cartItem.getBook().setQuantity(cartItem.getBook().getQuantity() - cartItem.getQuantity());
             order.getItems().add(orderItem);
         }
         cart.getItems().clear();
@@ -64,4 +67,8 @@ public class OrderService {
         return orderRepository.findByUser(user);
     }
 
+    @Transactional
+    public void delete(Long id) {
+        orderRepository.deleteById(id);
+    }
 }

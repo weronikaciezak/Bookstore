@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,5 +49,13 @@ public class Cart {
                 return;
             }
         }
+    }
+
+    public BigDecimal getTotalPrice() {
+        BigDecimal sum = BigDecimal.ZERO;
+        for (CartItem item : items) {
+            sum = sum.add(item.getBook().getPrice().multiply(BigDecimal.valueOf(item.getQuantity())));
+        }
+        return sum;
     }
 }

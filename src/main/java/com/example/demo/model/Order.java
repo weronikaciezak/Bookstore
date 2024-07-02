@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,7 +27,6 @@ public class Order {
 
     private Date date;
     private OrderStatus status;
-
-    //TODO ADD PRICE
+    private BigDecimal price;
 }
 

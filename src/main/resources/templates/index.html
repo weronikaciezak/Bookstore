@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista książek</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .card {
+            max-width: 18rem; /* Adjust the max width of the card */
+            margin: auto;
+        }
+        /*.card img {*/
+        /*    height: 200px; !* Adjust the height of the image *!*/
+        /*    object-fit: cover;*/
+        /*}*/
+        .card-body {
+            padding: 1rem; /* Adjust the padding */
+        }
+    </style>
 </head>
 <body>
 <!-- Navbar -->
@@ -51,9 +64,9 @@
     </div>
 
     <div class="row">
-        <div th:each="book : ${books}" class="col-md-4 mb-4">
+        <div th:each="book : ${books}" class="col-md-3 mb-4">
             <div class="card">
-                <img th:src="@{${'https://assets.teenvogue.com/photos/5e6bffbbdee1770008c6d9bd/16:9/w_2560%2Cc_limit/GettyImages-577674005.jpg'}}" class="card-img-top" alt="Book Photo">
+                <img th:src="@{${book.photo}}" class="card-img-top" alt="Book Photo">
                 <div class="card-body">
                     <h5 class="card-title" th:text="${book.title}"></h5>
                     <h6 class="card-subtitle mb-2 text-muted" th:text="${book.author}"></h6>

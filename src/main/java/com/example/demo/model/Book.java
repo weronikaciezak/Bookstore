@@ -22,6 +22,7 @@ public class Book {
     private String author;
     private BigDecimal price;
     private int quantity;
+    private String photo;
     public Book(int id){
         this.id = id;
     }
