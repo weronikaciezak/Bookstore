@@ -26,6 +26,10 @@
         .btn-edit {
             margin-top: 1rem;
         }
+        .flexbox {
+            display: flex;
+            justify-content: space-between;
+        }
     </style>
 </head>
 <body>
@@ -68,23 +72,24 @@
     <div class="row">
         <div class="col-md-12">
             <div th:each="order : ${order}" class="card">
-                <div class="card-body">
+                <div class="card-body flexbox">
+                    <div>
+                        <a th:href="@{/order/{id}(id=${order.id})}" class="order-header">
+                            Zamówienie nr: <span th:text="${order.id}"></span>
+                        </a>
+                        <div class="order-header" sec:authorize="hasAuthority('ADMIN')">
+                            Użytkownik: <span th:text="${order.user.username}"></span>
+                        </div>
+                        <div>
+                            Data: <span th:text="${order.date}"></span>
+                        </div>
+                        <div>
+                            Status: <span th:text="${order.status}"></span>
+                        </div>
 
-                    <a th:href="@{/order/{id}(id=${order.id})}" class="order-header">
-                        Zamówienie nr: <span th:text="${order.id}"></span>
-                    </a>
-                    <div class="order-header" sec:authorize="hasAuthority('ADMIN')">
-                        Użytkownik: <span th:text="${order.user.username}"></span>
-                    </div>
-                    <div>
-                        Data: <span th:text="${order.date}"></span>
-                    </div>
-                    <div>
-                        Status: <span th:text="${order.status}"></span>
-                    </div>
-
-                    <div>
-                        Kwota: <span th:text="${order.price}"></span>
+                        <div>
+                            Kwota: <span th:text="${order.price}"></span>
+                        </div>
                     </div>
 
                     <form method="get" th:action="@{/admin/orders/{id}(id=${order.id})}" sec:authorize="hasAuthority('ADMIN')" class="d-inline">

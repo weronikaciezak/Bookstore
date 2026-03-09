@@ -35,25 +35,53 @@ public class UserService {
         return userRepository.findByUsername(username);
     }
 
-    @Transactional
-    public String registerUser(User user) {
-        if (userRepository.findByUsername(user.getUsername()).isPresent()) {
-            return "Błędne dane";
-        }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setCart(new Cart());
-        Role userRole = roleRepository.findByName("USER").orElseGet(null);
-        if (userRole != null) {
-            user.getRoles().add(userRole);
-        } else {
-            Role role = new Role();
-            role.setName("USER");
-            user.getRoles().add(role);
-            roleRepository.save(role);
-        }
-        userRepository.save(user);
-        return "Zarejestrowano pomyślnie";
+//    @Transactional
+//    public String registerUser(User user) {
+//        if (userRepository.findByUsername(user.getUsername()).isPresent()) {
+//            return "Błędne dane";
+//        }
+//        user.setPassword(passwordEncoder.encode(user.getPassword()));
+//        user.setCart(new Cart());
+//        Role userRole = roleRepository.findByName("USER").orElseGet(null);
+//        if (userRole != null) {
+//            user.getRoles().add(userRole);
+//        } else {
+//            Role role = new Role();
+//            role.setName("USER");
+//            user.getRoles().add(role);
+//            roleRepository.save(role);
+//        }
+//        userRepository.save(user);
+//        return "Zarejestrowano pomyślnie";
+//    }
+@Transactional
+public String registerUser(User user) {
+    if (user == null || user.getUsername() == null || user.getUsername().isBlank()
+            || user.getPassword() == null || user.getPassword().isBlank()) {
+        return "Błędne dane";
     }
+
+    if (userRepository.findByUsername(user.getUsername()).isPresent()) {
+        return "Błędne dane";
+    }
+
+    user.setPassword(passwordEncoder.encode(user.getPassword()));
+    user.setCart(new Cart());
+
+    // Najważniejsza poprawka: NIE orElseGet(null)
+    Role userRole = roleRepository.findByName("USER")
+            .orElseGet(() -> {
+                Role role = new Role();
+                role.setName("USER");
+                return roleRepository.save(role);
+            });
+
+    user.getRoles().add(userRole);
+    userRepository.save(user);
+
+    return "success"; // pasuje do RegisterController (if result.equals("success"))
+}
+
 
     @Transactional
     public User getCurrentUser() {
